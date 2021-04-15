@@ -21,7 +21,8 @@
     "test-coveralls": "./scripts/test-coveralls.sh",
     "update-ui-snapshots": "jest --updateSnapshot",
     "eslint": "eslint --ext \".js,.jsx,.ts,.tsx\" src",
-    "build-serviceworker": "node ./scripts/build-serviceworker.js"
+    "build-serviceworker": "node ./scripts/build-serviceworker.js",
+    "update-cadet-api": "node ./scripts/update-cadet-api.js"
   },
   "husky": {
     "hooks": {
@@ -132,6 +133,7 @@
     "react-scripts": "^4.0.3",
     "react-test-renderer": "^17.0.1",
     "redux-saga-test-plan": "^4.0.1",
+    "swagger-typescript-api": "^8.0.3",
     "typescript": "^4.1.3"
   },
   "browserslist": {
