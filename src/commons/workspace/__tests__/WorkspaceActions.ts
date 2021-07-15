@@ -2,7 +2,6 @@ import { createDefaultWorkspace, SourceLanguage } from '../../application/Applic
 import { ExternalLibraryName } from '../../application/types/ExternalTypes';
 import { HIGHLIGHT_LINE } from '../../application/types/InterpreterTypes';
 import { Library } from '../../assessment/AssessmentTypes';
-import { SideContentType } from '../../sideContent/SideContentTypes';
 import {
   beginClearContext,
   browseReplHistoryDown,
@@ -11,7 +10,7 @@ import {
   changeEditorWidth,
   changeExternalLibrary,
   changeSideContentHeight,
-  changeSublanguage,
+  // changeSublanguage,
   chapterSelect,
   clearReplInput,
   clearReplOutput,
@@ -21,7 +20,7 @@ import {
   evalRepl,
   evalTestcase,
   externalLibrarySelect,
-  fetchSublanguage,
+  // fetchSublanguage,
   highlightEditorLine,
   moveCursor,
   navigateToDeclaration,
@@ -31,7 +30,6 @@ import {
   setEditorBreakpoint,
   toggleEditorAutorun,
   toggleUsingSubst,
-  updateActiveTab,
   updateCurrentAssessmentId,
   updateCurrentSubmissionId,
   updateEditorValue,
@@ -47,7 +45,7 @@ import {
   CHANGE_EDITOR_WIDTH,
   CHANGE_EXTERNAL_LIBRARY,
   CHANGE_SIDE_CONTENT_HEIGHT,
-  CHANGE_SUBLANGUAGE,
+  // CHANGE_SUBLANGUAGE,
   CHAPTER_SELECT,
   CLEAR_REPL_INPUT,
   CLEAR_REPL_OUTPUT,
@@ -56,7 +54,7 @@ import {
   EVAL_EDITOR,
   EVAL_REPL,
   EVAL_TESTCASE,
-  FETCH_SUBLANGUAGE,
+  // FETCH_SUBLANGUAGE,
   MOVE_CURSOR,
   NAV_DECLARATION,
   PLAYGROUND_EXTERNAL_SELECT,
@@ -65,7 +63,6 @@ import {
   SEND_REPL_INPUT_TO_OUTPUT,
   TOGGLE_EDITOR_AUTORUN,
   TOGGLE_USING_SUBST,
-  UPDATE_ACTIVE_TAB,
   UPDATE_CURRENT_ASSESSMENT_ID,
   UPDATE_CURRENT_SUBMISSION_ID,
   UPDATE_EDITOR_BREAKPOINTS,
@@ -379,18 +376,6 @@ test('resetWorkspace generates correct action object with provided workspace', (
   });
 });
 
-test('updateActiveTab generates correct action object', () => {
-  const activeTab = SideContentType.questionOverview;
-  const action = updateActiveTab(activeTab, playgroundWorkspace);
-  expect(action).toEqual({
-    type: UPDATE_ACTIVE_TAB,
-    payload: {
-      activeTab,
-      workspaceLocation: playgroundWorkspace
-    }
-  });
-});
-
 test('updateCurrentAssessmentId generates correct action object', () => {
   const assessmentId = 2;
   const questionId = 4;
@@ -453,27 +438,27 @@ test('moveCursor generates correct action object', () => {
   });
 });
 
-test('fetchSublanguage generates correct action object', () => {
-  const action = fetchSublanguage();
-  expect(action).toEqual({
-    type: FETCH_SUBLANGUAGE
-  });
-});
+// test('fetchSublanguage generates correct action object', () => {
+//   const action = fetchSublanguage();
+//   expect(action).toEqual({
+//     type: FETCH_SUBLANGUAGE
+//   });
+// });
 
-test('changeSublanguage generates correct action object', () => {
-  const sublang: SourceLanguage = {
-    chapter: 2,
-    variant: 'default',
-    displayName: 'Source \xa72'
-  };
-  const action = changeSublanguage(sublang);
-  expect(action).toEqual({
-    type: CHANGE_SUBLANGUAGE,
-    payload: {
-      sublang
-    }
-  });
-});
+// test('changeSublanguage generates correct action object', () => {
+//   const sublang: SourceLanguage = {
+//     chapter: 2,
+//     variant: 'default',
+//     displayName: 'Source \xa72'
+//   };
+//   const action = changeSublanguage(sublang);
+//   expect(action).toEqual({
+//     type: CHANGE_SUBLANGUAGE,
+//     payload: {
+//       sublang
+//     }
+//   });
+// });
 
 test('updateChapter generates correct action object', () => {
   const sublang: SourceLanguage = {

@@ -69,7 +69,6 @@ export type OwnProps = {
 };
 
 export type DispatchProps = {
-  handleActiveTabChange: (activeTab: SideContentType) => void;
   handleBrowseHistoryDown: () => void;
   handleBrowseHistoryUp: () => void;
   handleChangeExecTime: (execTime: number) => void;
@@ -81,7 +80,6 @@ export type DispatchProps = {
   handleEditorValueChange: (val: string) => void;
   handleEditorWidthChange: (widthChange: number) => void;
   handleEditorUpdateBreakpoints: (breakpoints: string[]) => void;
-  handleFetchSublanguage: () => void;
   handleGenerateLz: () => void;
   handleShortenURL: (s: string) => void;
   handleUpdateShortURL: (s: string) => void;
@@ -99,7 +97,6 @@ export type DispatchProps = {
   handleDebuggerResume: () => void;
   handleDebuggerReset: () => void;
   handleToggleEditorAutorun: () => void;
-  handleFetchChapter: () => void;
   handlePromptAutocomplete: (row: number, col: number, callback: any) => void;
   handlePersistenceOpenPicker: () => void;
   handlePersistenceSaveFile: () => void;
@@ -199,11 +196,6 @@ const Playground: React.FC<PlaygroundProps> = props => {
   React.useEffect(() => {
     // Fixes some errors with runes and curves (see PR #1420)
     propsRef.current.handleExternalSelect(propsRef.current.externalLibraryName, true);
-
-    // Only fetch default Playground sublanguage when not loaded via a share link
-    if (!propsRef.current.location.hash) {
-      propsRef.current.handleFetchSublanguage();
-    }
   }, []);
 
   React.useEffect(() => {
@@ -240,7 +232,6 @@ const Playground: React.FC<PlaygroundProps> = props => {
       (selectedTab === SideContentType.introduction ||
         selectedTab === SideContentType.remoteExecution)
     ) {
-      props.handleActiveTabChange(SideContentType.mobileEditor);
       setSelectedTab(SideContentType.mobileEditor);
     } else if (
       !isMobileBreakpoint &&
@@ -248,7 +239,6 @@ const Playground: React.FC<PlaygroundProps> = props => {
         selectedTab === SideContentType.mobileEditorRun)
     ) {
       setSelectedTab(SideContentType.introduction);
-      props.handleActiveTabChange(SideContentType.introduction);
     }
   }, [isMobileBreakpoint, props, selectedTab]);
 
@@ -794,9 +784,7 @@ const Playground: React.FC<PlaygroundProps> = props => {
     replProps: replProps,
     sideContentHeight: props.sideContentHeight,
     sideContentProps: {
-      defaultSelectedTabId: selectedTab,
       selectedTabId: selectedTab,
-      handleActiveTabChange: props.handleActiveTabChange,
       onChange: onChangeTabs,
       tabs,
       workspaceLocation: isSicpEditor ? 'sicp' : 'playground'
@@ -819,9 +807,7 @@ const Playground: React.FC<PlaygroundProps> = props => {
           githubButtons
         ]
       },
-      defaultSelectedTabId: selectedTab,
       selectedTabId: selectedTab,
-      handleActiveTabChange: props.handleActiveTabChange,
       onChange: onChangeTabs,
       tabs: mobileTabs,
       workspaceLocation: isSicpEditor ? 'sicp' : 'playground',
